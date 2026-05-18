@@ -1,0 +1,57 @@
+# openhuman-core — Docker Compose for local WSL2 deployment.
+# Project name: openhuman  (managed by start.sh / stop.sh)
+#
+# Builds the headless Rust core (`openhuman-core`) from a local clone of the
+# openhuman repo, persists the workspace to a named volume, and reads
+# secrets/config from the `.env` file next to this compose file.
+#
+# Usage:
+#   Use ./start.sh rather than invoking docker compose directly — it handles
+#   .env creation, token generation, and the initial image build automatically.
+#
+# API: http://localhost:7788
+
+services:
+  openhuman-core:
+    build:
+      context: ${OPENHUMAN_REPO_PATH:-~/repos/openhuman}
+      dockerfile: Dockerfile
+    image: openhuman-core:local
+    container_name: openhuman-core
+    restart: unless-stopped
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp
+    ports:
+      - "${OPENHUMAN_CORE_PORT:-7788}:7788"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Bind to 0.0.0.0 inside the container so port-forwarding works regardless
+      # of what `.env` says. The Dockerfile already sets this default, but make
+      # it explicit so an inherited shell value cannot override it.
+      OPENHUMAN_CORE_HOST: 0.0.0.0
+      OPENHUMAN_CORE_PORT: "7788"
+      OPENHUMAN_WORKSPACE: /home/openhuman/.openhuman
+      XDG_CACHE_HOME: /home/openhuman/.openhuman/cache
+      TMPDIR: /tmp
+      RUST_LOG: ${RUST_LOG:-info}
+    volumes:
+      - openhuman-workspace:/home/openhuman/.openhuman
+    mem_limit: ${OPENHUMAN_CORE_MEM_LIMIT:-4g}
+    cpus: ${OPENHUMAN_CORE_CPUS:-2.0}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:7788/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+
+volumes:
+  openhuman-workspace:
+    name: openhuman-workspace
