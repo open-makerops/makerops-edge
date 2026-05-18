@@ -1,5 +1,7 @@
 # MakerOps Edge
 
+![MakerOps Edge](assets/images/makerops-edge-hero.png)
+
 MakerOps Edge is the per-developer bundle of the MakerOps spoke-and-hub system. Install it on each team member's computer to bring AI assistant services and local integrations close to where work happens.
 
 The companion **MakerOps Core** collection is installed in a central location — a shared server or team machine — and provides services that Edge devices and the whole team can access together. Edge can connect to Core for a fully self-hosted setup, or use cloud AI providers standalone.
