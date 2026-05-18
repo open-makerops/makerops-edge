@@ -74,3 +74,12 @@ Each service is a separate Docker Compose project with its own network, volumes,
 | Service | Docker project | Storage |
 | ------- | -------------- | ------- |
 | OpenHuman | `openhuman` | `openhuman-workspace` volume (SQLite + memory trees) |
+
+## License
+
+MakerOps Edge is licensed under the [MakerOps Software License v1.0](LICENSE).
+
+**Permitted:** Personal use, educational use, internal business operations, and setup/consulting services.
+**Prohibited:** Selling or sublicensing the software, integrating it into commercial products sold to others, or offering it as a hosted or managed service.
+
+Third-party software orchestrated by this project is governed by its own license. See [NOTICE](NOTICE) for the full list of upstream projects and their licenses.

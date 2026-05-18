@@ -1,0 +1,26 @@
+MakerOps Edge
+Copyright (c) 2026-present Sean Cherbone
+
+This repository contains configuration and orchestration files for deploying
+the following third-party open-source software. Each project is the work of
+its respective authors and contributors and is governed by its own license.
+
+-------------------------------------------------------------------------------
+
+OpenHuman
+https://github.com/tinyhumansai/openhuman
+License: GNU General Public License v3.0
+https://github.com/tinyhumansai/openhuman/blob/main/LICENSE
+
+Note: MakerOps Edge contains no OpenHuman source code. It interacts with
+OpenHuman exclusively via its published network RPC API (localhost:7788) and
+is not a derivative work of OpenHuman under the GPL v3 or applicable copyright
+law. Users are responsible for independently obtaining OpenHuman and complying
+with its GPL v3 license terms.
+
+-------------------------------------------------------------------------------
+
+Supporting infrastructure components:
+
+Docker Engine — Apache License 2.0 — https://github.com/moby/moby/blob/master/LICENSE
+Docker Compose — Apache License 2.0 — https://github.com/docker/compose/blob/main/LICENSE
